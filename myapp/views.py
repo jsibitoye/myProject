@@ -74,7 +74,7 @@ def counter (request):
     wordamount = len(text.split(' '))
     context = {
 
-        'name': 'Oluwaseyi',
+        'name': 'Oluwafunmilayo temi',
         'age' : '25',
         'Nationality' : 'Nigeria',
         'Level' : 'PhD',
