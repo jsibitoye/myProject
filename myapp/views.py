@@ -2,8 +2,10 @@ from cgitb import text
 from multiprocessing import context
 from unicodedata import name
 from urllib import request
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 from .models import feature
 # Create your views here.
 
@@ -51,12 +53,28 @@ def index(request):
     return render(request, 'index.html', {'features': features})
 
 def register (request):
-    username = request.POST[username]
-  #  email = request.POST[email]
-   # password = request.POST[password]
-    #password2 = request.POST[password2]
-    
-    return render (request, 'register.html')
+    if request.method == 'POST':
+       # email = request.POST[email]
+        username = request.POST[username]
+        password = request.POST[password]
+        password2 = request.POST[password2]
+        
+        if password == password2:
+            if User.objects.filter(email=email).exits():
+                messages.info(request, 'email in usee')
+                return redirect('register')
+            elif User.objects.filter(username=username).exits():
+                messages.info(request, 'UserName already in usee')
+                return redirect('register.html')
+            else: 
+                user = User.objects.create_user(username = username, email = email, password = password)
+                User.save
+            return redirect('login')
+        else: 
+            messages.info(request, 'wrong password')
+            return redirect('register')
+    else:
+        return render(request, 'register.html')
 
 #*******creating a function for counter here
 

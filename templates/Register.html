@@ -7,7 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="register" method="post">
+    {%for message in messages%}
+        <h5>{{message}}</h5>
+    {%endfor%}
+    <form method="POST" action="register">
         {% csrf_token %}
         <h1>Register here</h1>
         <p>Username: </p>
