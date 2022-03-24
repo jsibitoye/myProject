@@ -1,10 +1,10 @@
 from cgitb import text
-from multiprocessing import context
+#from multiprocessing import context
 from unicodedata import name
 from urllib import request
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import feature
 # Create your views here.
@@ -54,29 +54,39 @@ def index(request):
 
 def register (request):
     if request.method == 'POST':
-       # email = request.POST[email]
-        username = request.POST[username]
-        password = request.POST[password]
-        password2 = request.POST[password2]
+        VarEmail = request.POST['emailPg']
+        VarUsername = request.POST['usernamePg']
+        VarPassword = request.POST['passwordPg']
+        VarPassword2 = request.POST['password2Pg']
         
-        if password == password2:
-            if User.objects.filter(email=email).exits():
+        if VarPassword == VarPassword2:
+            if User.objects.filter(email=VarEmail).exists():
                 messages.info(request, 'email in usee')
                 return redirect('register')
-            elif User.objects.filter(username=username).exits():
+            elif User.objects.filter(username=VarUsername).exists():
                 messages.info(request, 'UserName already in usee')
                 return redirect('register.html')
             else: 
-                user = User.objects.create_user(username = username, email = email, password = password)
+                user = User.objects.create_user(username = VarUsername, email = VarEmail, password = VarPassword)
                 User.save
             return redirect('login')
         else: 
-            messages.info(request, 'wrong password')
+            messages.info(request, 'Password doesn\'t match')
             return redirect('register')
     else:
         return render(request, 'register.html')
 
 #*******creating a function for counter here
+def login(request): 
+    if request.method == 'POST':
+        VarUsername = request.POST['usernamePg']
+        VarPassword = request.POST['passwordPg']
+       # if User.objects.filter(username=VarUsername).exists():
+           # return redirect(request,'index')
+
+    else:
+        return redirect(request,'login')
+
 
 def josh (request):
     

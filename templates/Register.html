@@ -7,20 +7,21 @@
     <title>Document</title>
 </head>
 <body>
+    <h1> Register here now </h1>
     {%for message in messages%}
-        <h5>{{message}}</h5>
+        <h5 style="color: red;">{{message}}</h5>
     {%endfor%}
+  
     <form method="POST" action="register">
         {% csrf_token %}
-        <h1>Register here</h1>
         <p>Username: </p>
-        <input type="text" name="username">
+        <input type="text" name="usernamePg">
         <p>Email: </p>
-        <input type="email" name="email">
+        <input type="email" name="emailPg">
         <p>password : </p>
-        <input type="password" name="password">
+        <input type="password" name="passwordPg">
         <p>Repeat password: </p>
-        <input type="password" name="password2"> <br> <p></p>
+        <input type="password" name="password2Pg"> <br> <p></p>
         <input type="submit">
     </form>
 </body>

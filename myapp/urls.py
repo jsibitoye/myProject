@@ -7,5 +7,6 @@ urlpatterns  = [
 #  path('url id according to action, which view, the name you want to give it - may be empty') 
 #  so you can have the end result of view.counter pointing back at index.html
    path('counter', views.counter, name='thisCouldBeAnyrthing'),
-   path('register', views.register, name='register')
+   path('register', views.register, name='register'),
+   path('login', views.login, name='login')
 ]
