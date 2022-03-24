@@ -4,7 +4,7 @@ from unicodedata import name
 from urllib import request
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .models import feature
 # Create your views here.
@@ -81,11 +81,18 @@ def login(request):
     if request.method == 'POST':
         VarUsername = request.POST['usernamePg']
         VarPassword = request.POST['passwordPg']
+        user = auth.authenticate(username = VarUsername, password = VarPassword)
+        if user is not None: 
+            auth.login(request, user)
+            return redirect('/')
+        else : 
+            messages.info(request, 'invalid credentials')
+            return redirect('login')
        # if User.objects.filter(username=VarUsername).exists():
            # return redirect(request,'index')
 
     else:
-        return redirect(request,'login')
+        return render(request,'login.html')
 
 
 def josh (request):
