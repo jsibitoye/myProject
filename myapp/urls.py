@@ -8,5 +8,6 @@ urlpatterns  = [
 #  so you can have the end result of view.counter pointing back at index.html
    path('counter', views.counter, name='thisCouldBeAnyrthing'),
    path('register', views.register, name='register'),
-   path('login', views.login, name='login')
+   path('login', views.login, name='login'),
+   path('logout', views.logout, name='logout')
 ]
