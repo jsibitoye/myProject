@@ -9,5 +9,8 @@ urlpatterns  = [
    path('counter', views.counter, name='thisCouldBeAnyrthing'),
    path('register', views.register, name='register'),
    path('login', views.login, name='login'),
-   path('logout', views.logout, name='logout')
+   path('logouts', views.logouts, name='logouts'),
+   #path('userpost/<str:pk>', views.userpost, 'userpost') # note the /str: pk, it means we want this line to call userpost in view but send in a parameter named pk.
+   path('post/<str:pk>', views.post,name='post'),
+   path('userpost',views.userpost, name='userpost')
 ]

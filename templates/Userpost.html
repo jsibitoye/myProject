@@ -1,0 +1,5 @@
+<h1>User List</h1>
+{%for UserLists in UserList%}
+  <a href="post/{{UserLists}}"> {{UserLists}} </a> <br>
+  <h1>or second method of posting: <a href="{%url 'post' UserLists%}"> {{UserLists}} </a></h1>
+{%endfor%}

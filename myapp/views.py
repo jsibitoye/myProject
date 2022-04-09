@@ -1,4 +1,5 @@
 from cgitb import text
+from collections import UserList
 #from multiprocessing import context
 from unicodedata import name
 from urllib import request
@@ -94,8 +95,8 @@ def login(request):
     else:
         return render(request,'login.html')
 
-def logout (request):
-    auth.logout(request)
+def logouts (request):
+    auth.logout(request) # .logout here is an attribut of auth just like auth.login
     return redirect('/')
     
 def josh (request):
@@ -107,7 +108,7 @@ def josh (request):
     return render(request, 'counter.html', {'text': numWord})
     
 def counter (request):
-   
+
     text = request.POST['text']
     wordamount = len(text.split(' '))
     context = {
@@ -118,4 +119,15 @@ def counter (request):
         'Level' : 'PhD',
         'text' : wordamount,
     }
-    return render(request, 'index.html',context)
+    return render(request, 'index.html',context),
+
+def post(request, pk):
+    return render (request, 'post.html', {'pk':pk})
+
+def userpost(request):
+    UserList = [
+        "tope",
+        "Folarin",
+        "Oluwafunmilayo"
+    ]
+    return render(request, 'userpost.html',{'UserList':UserList})
